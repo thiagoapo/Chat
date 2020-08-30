@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{sending ? 'Ligando...' : 'Chamada'}}</h4>
+</div>
+
+<div class="modal-body">
+    {{ getContent() }}
+</div>
+
+<div class="modal-footer">
+    <span (click)="closeModal(false)" class="fa fa-phone-square phone-cancel" [ngStyle]="{'margin-right' : !sending ? '20px' : '0px'}"  data-toggle="tooltip" [title]="sending ? 'Cancelar' : 'Rejeitar'"></span>
+    <span *ngIf="!sending" (click)="closeModal(true)" class="fa fa-phone-square phone-accept"  data-toggle="tooltip" title="Atender"></span>
+</div>

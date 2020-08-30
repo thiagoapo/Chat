@@ -1,0 +1,31 @@
+.send{
+    color:blue; 
+    font-size: 25px;
+    cursor: pointer;
+}
+.logout{
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.chat-content{
+    height: 300px;
+    overflow: auto;
+}
+
+.mesage{
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+}
+.message-me{
+    background-color: darkgray;
+}
+
+.message-other{
+    background-color: darkseagreen;
+}
+
+input{
+    width: 100%;
+}

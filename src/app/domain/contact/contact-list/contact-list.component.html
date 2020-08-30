@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading c-list">
+                    <span class="connection">
+                            <span class="fa fa-tablet text-muted c-info" data-toggle="tooltip" title="Conexão"></span>
+                        Conexão ID: {{meId}} <a href="contact/list" target="_blank" class="c-info" data-toggle="tooltip" data-placement="top" title="Nova Conexão"><i class="fa fa-plus"></i></a></span>
+                    <hr/>
+                    <br/>
+                    <span class="title">Contatos</span>
+                    <ul class="pull-right c-controls">
+                        <li><a (click)="add()" class="c-info" data-toggle="tooltip" data-placement="top" title="Add Contact"><i class="fa fa-plus"></i></a></li>
+                    </ul>
+                </div>
+            
+                <ul class="list-group" id="contact-list">
+                    <li class="list-group-item" *ngFor="let item of list">
+                        <div *ngIf="!item.isEdit" class="col-xs-12 col-sm-9">
+                            <span class="name">{{item.name}}</span>  <br/>
+                            <span class="visible-xs"> <span class="text-muted">ID: {{item.id}}</span></span><br/>
+                            <span (click)="edit(item)" class="fa fa-edit text-muted c-info" data-toggle="tooltip" title="Editar"></span>
+                            <span (click)="remove(item)" class="fa fa-minus-square text-muted c-info" data-toggle="tooltip" title="Excluir"></span>
+                            <span (click)="me(item)"  class="fa fa-user-circle text-muted c-info" [ngClass]="{'me': getStatusMe(item) }" data-toggle="tooltip" title="Assumir"></span>
+                            <span *ngIf="!getStatusMe(item)" class="fa fa-signal text-muted c-info" [ngClass]="{'online': getStatusOnline(item) }" data-toggle="tooltip" title="Status"></span>
+                            <span  (click)="link(item)" *ngIf="!getStatusMe(item) && getStatusOnline(item) && hasContactMe()" class="fa fa-phone text-muted c-info" data-toggle="tooltip" title="Ligar"></span>
+                            <span *ngIf="!getStatusMe(item) && getStatusOnline(item) && hasContactMe()" class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Mensagem"></span>
+                            <span *ngIf="getStatusMe(item)">Você é este contato!</span>
+                        </div>
+                        <div *ngIf="item.isEdit" class="col-xs-12 col-sm-9">
+                            <input class="input-control" type="text"  [(ngModel)]="item.name" placeholder="Nome" />  <br/>
+                            <span (click)="cancel(item)"  class="fa fa-arrow-left text-muted c-info" data-toggle="tooltip" title="Cancelar"></span>
+                            <span (click)="save(item)"  class="fa fa-check text-muted c-info" data-toggle="tooltip" title="Salvar"></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+	</div>
+
+    <ng-template #mymodal let-modal let-linkTo>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Ligando...</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    Chamada para {{linkTo.name}}
+            </div>
+            <div class="modal-footer">
+              <span class="fa fa-phone-square" style="color:red; font-size: 45px;" data-toggle="tooltip" title="Cancelar"></span>
+            </div>
+          </ng-template>

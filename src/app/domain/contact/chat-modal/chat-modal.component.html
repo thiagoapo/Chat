@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Chat</h4>
+</div>
+
+<div class="modal-body">
+    <div class="chat-content" #scrollMe>
+            <div class="col-12" *ngFor="let message of messages">
+                <div class="mesage col-6" [ngClass]="{'pull-right message-me': isMe(message), 'pull-left message-other': !isMe(message)}">
+                        <span>
+                            <b>{{getName(message)}}:</b>
+                        </span>
+                        <span>
+                            {{message.content}}
+                        </span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+    </div>
+    <hr>
+
+    <div class="row"> 
+            <div class="col-10">
+                    <input  [(ngModel)]="message" rows="1" (keydown.enter)="sendMessage()">
+            </div>
+            <div class="col-2">
+                    <span (click)="sendMessage()" class="fa fa-paper-plane send"  data-toggle="tooltip" title="Enviar"></span>
+            </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <span (click)="closeModal()" class="fa fa-power-off logout"  data-toggle="tooltip" title="Sair"></span>
+</div>
